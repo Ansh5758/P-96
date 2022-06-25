@@ -144,15 +144,20 @@
         user = localStorage.getItem('User');
         room = localStorage.getItem('Room');
         document.title = 'WebChat - ' + room;
-        function send(){
+        function send() {
             message = document.getElementById('username').value;
-            firebase.database().ref(room).push({
-                Message: message,
-                User: user,
-                Likes: 0
-            });
-            document.getElementById('box').style.visibility = 'visible';
-            document.getElementById('username').value = '';
+            if (message == '') {
+                alert('Kindly type the message.');
+            } else {
+                firebase.database().ref(room).push({
+                    Message: message,
+                    User: user,
+                    Likes: 0
+
+                });
+                document.getElementById('box').style.visibility = 'visible';
+                document.getElementById('username').value = '';
+            }
         }
         function logout(){
             localStorage.removeItem('Room');
